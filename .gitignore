@@ -200,3 +200,8 @@ temp/
 # Release
 x64/
 v17/
+
+# Sensitive data
+*.jpg
+*.jpeg
+*.png
