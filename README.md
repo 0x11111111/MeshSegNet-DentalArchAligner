@@ -31,11 +31,6 @@ Pew-Thian Yap, Ching-Chang Ko, and Dinggang Shen
 3. **Install pygco:**
 
     ```powershell
-    # Install pygco with Poetry
-    poetry add pygco
-    ```
-
-    ```powershell
     poetry run pip install https://files.pythonhosted.org/packages/df/a8/e4de23aa0e23239e376bc1842be815a91355b5a7dd8d97ce01dc2c6eb27c/pygco-0.0.16.tar.gz
     ```
 
@@ -49,7 +44,7 @@ Pew-Thian Yap, Ching-Chang Ko, and Dinggang Shen
     pip install -e .
     ```
 
-5. **Get a compiled cbct_jaw_registration.pyd from this project.**
+5. **Get a compiled cbct_jaw_registration.pyd from [this project](https://github.com/0x11111111/CBCTReconstructionICP).**
 **This pyd is by default included in the source project and is dedicated to Windows platform. If you need a Linux or MacOS version please refer to this source project.**
 Make sure the `cbct_jaw_registration.pyd` is located in the root folder.
 
