@@ -49,6 +49,26 @@ Pew-Thian Yap, Ching-Chang Ko, and Dinggang Shen
     pip install -e .
     ```
 
+5. **Get a compiled cbct_jaw_registration.pyd from this project.**
+**This pyd is by default included in the source project and is dedicated to Windows platform. If you need a Linux or MacOS version please refer to this source project.**
+Make sure the `cbct_jaw_registration.pyd` is located in the root folder.
+
+## Usage Guideline
+
+1. Call the `registration()` function in `registration.py`. Here is the [example](https://github.com/0x11111111/MeshSegNet-DentalArchAligner/blob/master/registration.py#L92).
+This is the signature:
+`def registration(upper_jaw_mesh: str, lower_jaw_mesh: str, cbct_path: str, temp_path: str)`
+Explanation:
+   1. upper_jaw_mesh: absolute or relative path to upper jaw mesh file. (Normal mesh file formats supported)
+
+   2. lower_jaw_mesh: absolute or relative path to lower jaw mesh file. (Normal mesh file formats supported)
+
+   3. cbct_path: absolute or relative path to Nitfl CBCT file. (.nii, .gz, .zip, .rar and .7z are supported)
+
+   4. temp_path: absolute or relative path to temporary folder. The aligned files will be output to this folder as well. **Be advised: Any thing inside this folder will be once this function is called!**
+
+1. Under the `temp_path`, there will be two aligned files: `upper_jaw_transformed.ply` and `lower_jaw_transformed.ply`. Todo: Expose the rigid transformation matrix and vector.
+
 **Lines down from here are from MeshSegNet's README.md. The installation steps are deprecated in this project.**
 
 Prequisites
