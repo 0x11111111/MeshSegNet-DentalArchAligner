@@ -1,3 +1,5 @@
+# This project has been modified to a mixed project for Teeth Segmentation(MeshSegNet), Arch Detection and Positioning(YOLOv10), CBCT Reconstruction(MeshLib) and Teeth ICP Alignment(Meshlib)
+
 **MeshSegNet: Deep Multi-Scale Mesh Feature Learning for Automated Labeling of Raw Dental Surface from 3D Intraoral Scanners**
 ==============================================================================================================================
 
@@ -7,8 +9,51 @@ Pew-Thian Yap, Ching-Chang Ko, and Dinggang Shen
 
 ![](meshsegnet_architecture.png)
 
+## Environment Installation
+
+**This environment management of this project has been upgraded to Conda + Poetry. Please follow these steps to setup.**
+
+1. **Setup Conda environment:**
+
+    ```powershell
+    conda create -n dental_arch_aligner python=3.9
+    conda activate dental_arch_aligner
+    conda install -c conda-forge ca-certificates=2022.10.11 certifi=2022.12.7 libffi=3.4.2 openssl=1.1.1s sqlite=3.40.0 tk=8.6.12 xz=5.2.8 zlib=1.2.13 poetry
+    conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+    ```
+
+2. **Use Poetry to manage the dependencies:**
+
+    ```powershell
+    poetry install
+    ```
+
+3. **Install pygco:**
+
+    ```powershell
+    # Install pygco with Poetry
+    poetry add pygco
+    ```
+
+    ```powershell
+    poetry run pip install https://files.pythonhosted.org/packages/df/a8/e4de23aa0e23239e376bc1842be815a91355b5a7dd8d97ce01dc2c6eb27c/pygco-0.0.16.tar.gz
+    ```
+
+4. **Setup Yolov10 as submodule.**
+
+    ```powershell
+    git submodule add https://github.com/THU-MIG/yolov10.git yolov10
+    git submodule update --init --recursive
+    git add .gitmodules yolov10
+    cd yolov10
+    pip install -e .
+    ```
+
+**Lines down from here are from MeshSegNet's README.md. The installation steps are deprecated in this project.**
+
 Prequisites
 ------------
+
 Please see requirtments.txt
 
 Introduction
@@ -30,12 +75,12 @@ Step 1 Data Augmentation
 
 In order to increase the training dataset, we first augment the available
 intraoral scans (i.e., meshes) by 1) random rotation, 2) random translation, and
-3) random rescaling of each mesh in reasonable ranges.
+1) random rescaling of each mesh in reasonable ranges.
 
 In this work, our intraoral scans are stored as VTP (VTK polygonal data) format.
 To read, write, and manipulate VTP files programmingly, we use **vedo**. Please refer to
 <https://github.com/marcomusy/vedo>. If you need a GUI tool to read, annotate, modify label, and save VTP files, please refer to <https://github.com/Tai-Hsien/Mesh_Labeler>.
-In this work, we have 36 intraoral scans, and all of these scans have been downsampled previously. 
+In this work, we have 36 intraoral scans, and all of these scans have been downsampled previously.
 We use 24 scans as the training set, 6 scans as the validation set,
 and keep 6 scans as the test set. For training and validation sets, each scan
 (e.g., Sample\_01\_d.vtp) and its flipped (e.g., Sample\_01001\_d.vtp) are augmented
@@ -135,13 +180,11 @@ License
 
 The MeshSegNet code is released under MIT License (see LICENSE file for details).
 
-
 Citation
 --------
 
 If you find our work useful in your research, please cite:
 
 * C. Lian et al., "Deep Multi-Scale Mesh Feature Learning for Automated Labeling of Raw Dental Surfaces From 3D Intraoral Scanners," in IEEE Transactions on Medical Imaging, vol. 39, no. 7, pp. 2440-2450, July 2020, doi: 10.1109/TMI.2020.2971730.
-* Lian C. et al. (2019) MeshSNet: Deep Multi-scale Mesh Feature Learning for End-to-End Tooth Labeling on 3D Dental Surfaces. In: Shen D. et al. (eds) Medical Image Computing and Computer Assisted Intervention – MICCAI 2019. MICCAI 2019. Lecture Notes in Computer Science, vol 11769. Springer, Cham. https://doi.org/10.1007/978-3-030-32226-7_93
-* Wu TH. et al. (2021) Machine (Deep) Learning for Orthodontic CAD/CAM Technologies. In: Ko CC., Shen D., Wang L. (eds) Machine Learning in Dentistry. Springer, Cham. https://doi.org/10.1007/978-3-030-71881-7_10
-
+* Lian C. et al. (2019) MeshSNet: Deep Multi-scale Mesh Feature Learning for End-to-End Tooth Labeling on 3D Dental Surfaces. In: Shen D. et al. (eds) Medical Image Computing and Computer Assisted Intervention – MICCAI 2019. MICCAI 2019. Lecture Notes in Computer Science, vol 11769. Springer, Cham. <https://doi.org/10.1007/978-3-030-32226-7_93>
+* Wu TH. et al. (2021) Machine (Deep) Learning for Orthodontic CAD/CAM Technologies. In: Ko CC., Shen D., Wang L. (eds) Machine Learning in Dentistry. Springer, Cham. <https://doi.org/10.1007/978-3-030-71881-7_10>

@@ -1,0 +1,3 @@
+[submodule "yolov10"]
+	path = yolov10
+	url = https://github.com/THU-MIG/yolov10.git
